@@ -1,0 +1,14 @@
+/* General */
+body{
+    font-family:"Book Antiqua", 'Georgia';
+}
+
+#participatedGames{
+    width: 100vw;
+    text-align: center;
+}
+
+
+#gameTable{
+    width: 100vw;
+}

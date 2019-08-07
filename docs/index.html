@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Pete's Pet Shop</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h2>じゃんけんゲーム</h2>
+
+   <div id="participatedGames">
+        <table class="table-dark" id="gameTable">
+            <tr>
+                <td>Game ID</td>
+                <td>As Host</td>
+                <td>Guest Player<br>Joined</td>
+                <td>Host Player<br>Showed the hand</td>
+                <td>Guest Player<br>Showed the hand</td>
+            </tr>
+        </table>
+   </div>
+    <div class="container mt-4 p-3 border" id="startGame">
+        <h5>ゲームを開始する</h5>
+        <input type="text" id="player1bet"> ether
+        <button id="createButton" class="btn btn-primary" type="button" name="button">ゲーム開始（ホストになる）</button>
+    </div>
+
+    <div class="container mt-4 p-3 border" id="joinGame">
+        <h5>ゲームに参加する</h5>
+        ゲームID: <input type="text" id="gameId" name="" value="">
+        <button id="joinButton" class="btn btn-primary" type="button" name="button">ゲーム参加（ゲストになる）</button>
+    </div>
+
+
+    <!-- モーダルを開くボタン・リンク -->
+    <div class="container mt-4 p-3 border" id="">
+        <div class="row mb-5">
+            <div class="">
+                <h5>じゃんけんの手を決める</h5>
+                ゲームID: <input type="text" id="gameIdForModal" name="" value="">
+                <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#hostHand">ホストプレイヤーとして手を出す</button>
+                <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#guestHand">ゲストプレイヤーとして手を出す</button>
+                <button type="button" class="btn btn-primary mb-12" data-toggle="modal" data-target="#showResult">結果を見る（ホストプレイヤーのみ）</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- モーダル -->
+    <div class="modal fade" id="hostHand" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">手を出す</h4>
+                </div>
+                <div class="modal-body">
+                    <select id="player1hand">
+                        <option value="1">グー</option>
+                        <option value="2">チョキ</option>
+                        <option value="3">パー</option>
+                    </select>
+                    パスフレーズ: <input type="text" name="" value="" id="passPhrase">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                    <button type="button" class="btn btn-primary" id="player1HandSubmit">送信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル -->
+    <div class="modal fade" id="guestHand" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">手を出す</h4>
+                </div>
+                <div class="modal-body">
+                    <select id="player2hand">
+                        <option value="1">グー</option>
+                        <option value="2">チョキ</option>
+                        <option value="3">パー</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                    <button type="button" class="btn btn-primary" id="player2handSubmit">送信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル -->
+    <div class="modal fade" id="showResult" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">手を出す</h4>
+                </div>
+                <div class="modal-body">
+                    <select id="player1handConfirm">
+                        <option value="1">グー</option>
+                        <option value="2">チョキ</option>
+                        <option value="3">パー</option>
+                    </select>
+                    パスフレーズ: <input type="text" name="" value="" id="passPhraseConfirm">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                    <button type="button" class="btn btn-primary" id="judge">送信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-4 mb-4 p-3 border">
+        <h5>返金処理を行う</h5>
+        ゲームID: <input type="text" id="gameIdForGetBackBet">
+        <button class="btn btn-primary" id="getBackBet" type="button" name="button">返金</button>
+    </div>
+
+
+    <div class="jumbotron">
+      <div class="container">
+        <h3>ルール</h3>
+        <h4>ゲームホストとして参加する場合</h4>
+        <ol>
+            <li>掛け金を決めてゲーム開始（ホストになる）をクリックしてください。</li>
+            <li>ゲーム開始するとゲームIDが表示されます。</li>
+            <li>Guest Player Joinedが◯になったらホストプレイヤーとして手を出してください。その際にパスフレーズを入力してください（パスフレーズは出した手をハッシュにするために使用されます。）。</li>
+            <li>Guest Player Showed the handが◯になったら、結果を見るをクリックして、出した手と同じ手およびパスフレーズを入力してください。</li>
+            <li>勝っていたら掛け金を総取り、負けていたら掛け金没収、あいこの場合は自分が掛けた分だけ返ってきます。</li>
+        </ol>
+
+        <h4>ゲームゲストとして参加する場合</h4>
+        <ol>
+            <li>ゲームIDを入力してゲーム参加（ゲストになる）をクリックしてください。</li>
+            <li>ゲーム開始するとゲームIDが表示されます。ホストではないのでAs Hostは×が表示されます。</li>
+            <li>Host Player Showed the handが◯になったら、自分の手を出して下さい</li>
+            <li>勝っていたら掛け金を総取り、負けていたら掛け金没収、あいこの場合は自分が掛けた分だけ返ってきます。</li>
+        </ol>
+
+        <h4>返金行いたい場合は返金ボタンを押してください。</h4>
+        <p>そのゲームに対して最後に行われた操作から10分後に返金ボタンは有効になります。</p>
+        <ul>
+            <li>ゲーム開始したが誰も現れなかった場合、自分の掛け金が返ってきます。</li>
+            <li>ゲームに参加したが、ホストプレイヤーが手を出さなかった場合、ホストプレイヤーが掛けた金額も含めて全額取得できます。</li>
+            <li>ホストプレイヤーが手を出したがゲストが手を出さなかった場合、ゲストプレイヤーが掛けた金額も含めて全額取得できます。</li>
+            <li>ゲストとして手を出したが、ホストプレイヤーが結果を表示させなかった場合、ホストが掛けた金額も含めて全額取得できます。</li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
